@@ -33,12 +33,7 @@ function onStart() {
 }
 
 function updateView(time){
-    if (! allEpochs.includes(time)) {
-		// if there is no actual epoch for it dont call the thing
-		return
-	} else {
-		// update 
-	}
+	
 	console.log(nameColours)
 	
 	sliderVal = time;
@@ -49,7 +44,14 @@ function updateView(time){
 	d = d.toString().split(" ")[4];
 	document.getElementById("sliderValLabel").innerHTML = "Time: " + d;
 
-	//update people
+	// //update people
+	// console.log(time.toString())
+    // if (! allEpochs.includes(time.toString())) {
+	// 	// if there is no actual epoch for it dont call the thing
+	// 	console.log("Doesnt contains")
+	// 	return
+	// } 
+
 	console.log("creating request")
 	var http = new XMLHttpRequest();
 	http.onreadystatechange = function() {//Call a function when the state changes.
