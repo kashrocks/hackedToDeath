@@ -249,5 +249,5 @@ btn_right.addEventListener('click',function(){
     }
 });
 
-
+onStart();
 updateView(sliderVal);
