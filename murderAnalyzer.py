@@ -89,6 +89,8 @@ def main():
 
     with open('analyzedData.json', 'w') as outfile:
         json.dump(GUESTS, outfile)
+    
+    with open('allEpochs.json', 'w') as outfile:
+        json.dump({'all_epochs':list(data.keys())}, outfile)
 
     #pprint.pprint(GUESTS)
-    
