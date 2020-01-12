@@ -244,9 +244,8 @@ document.getElementById("button-left").addEventListener('click',function(){
 
     var repeat = function () {
         if(sliderVal > 0){
-			epochIndex -= 1;
-			sliderVal = allEpochs[epochIndex] // gets the next epoch above
-			updateView(parseInt(sliderVal));
+			sliderVal -= 1
+			getEpoch(sliderVal)
 		}
         t = setTimeout(repeat, 100);
         //start = start / speedup;
@@ -268,9 +267,8 @@ btn_right.addEventListener('click',function(){
 
     var repeat = function () {
         if(sliderVal < 441){
-			epochIndex += 1;
-			sliderVal = allEpochs[epochIndex] // gets the next epoch above
-			updateView(parseInt(sliderVal));
+			sliderVal += 1;
+			getEpoch(sliderVal)
 		}
         t = setTimeout(repeat, 100);
         //start = start / speedup;
