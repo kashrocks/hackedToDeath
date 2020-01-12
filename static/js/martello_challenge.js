@@ -36,6 +36,8 @@ function updateView(time){
 	if (! allEpochs.includes(time)) {
 		// if there is no actual epoch for it dont call the thing
 		return
+	} else {
+		// update 
 	}
 	console.log("updated")
 	
