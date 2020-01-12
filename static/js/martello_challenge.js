@@ -2,9 +2,11 @@ var g = document.getElementById("g");
 var tracker = {};
 var colours = ["#800000","#e6194b","#f58231","#008080","#000075","#4363d8","#911eb4","#f032e6","#e6beff","#000000","808080","808000"];
 var nameColours = {};
-var sliderVal = 1578151801;
+var sliderVal = 0;
 allEpochs = [];
 epochIndex = 0;
+test = 0;
+mutex = 0;
 
 const circlePadding = 40;
 const textPadding = 20;
@@ -27,16 +29,23 @@ function onStart() {
 		}
 	}
 	http.open('GET', "/allepochs", true);
-	http.send();
+	http.send();	
 	console.log("sent ting");
 
+}
+
+function getEpoch(index) {
+	epoch = allEpochs[index]
+	epochIndex = index
+
+	updateView(parseInt(epoch))
 }
 
 function updateView(time){
 	
 	console.log(nameColours)
 	
-	sliderVal = time;
+	sliderVal = epochIndex;
 	document.getElementById("timeSlider").value = sliderVal;
 
 	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
@@ -44,30 +53,39 @@ function updateView(time){
 	d = d.toString().split(" ")[4];
 	document.getElementById("sliderValLabel").innerHTML = "Time: " + d;
 
-	// //update people
+	//update people
 	// console.log(time.toString())
     // if (! allEpochs.includes(time.toString())) {
 	// 	// if there is no actual epoch for it dont call the thing
 	// 	console.log("Doesnt contains")
 	// 	return
 	// } 
+	test += 1;
 
-	console.log("creating request")
-	var http = new XMLHttpRequest();
-	http.onreadystatechange = function() {//Call a function when the state changes.
-		if(http.readyState == 4 && http.status == 200) {
-			updates = JSON.parse(this.responseText);
-			console.log(updates)
+	if(mutex == 0){
+		console.log("creating request")
+		var http = new XMLHttpRequest();
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
+				updates = JSON.parse(this.responseText);
+				console.log(updates)
 
-			clearAll();
-			for(person of Object.keys(updates)){
-				redraw(person,updates[person].location);
+				clearAll();
+				for(person of Object.keys(updates)){
+					redraw(person,updates[person].location);
+				}
+				mutex = 0;
+			}
+			else{
+				mutex = 1;
 			}
 		}
+		http.open('GET', "/time/"+time, true);
+		http.send();
+
+		console.log("sent ting " + test);
 	}
-	http.open('GET', "/time/"+sliderVal, true);
-	http.send();
-	console.log("sent ting");
+	
 }
 
 function clearAll(){
@@ -223,10 +241,10 @@ document.getElementById("button-left").addEventListener('click',function(){
 	var btn_left = document.getElementById("button-left");
 
     var repeat = function () {
-        if(sliderVal > 1578151801){
+        if(sliderVal > 0){
 			epochIndex -= 1;
 			sliderVal = allEpochs[epochIndex] // gets the next epoch above
-			updateView(sliderVal);
+			updateView(parseInt(sliderVal));
 		}
         t = setTimeout(repeat, 100);
         //start = start / speedup;
@@ -247,10 +265,10 @@ btn_right.addEventListener('click',function(){
 	var t;
 
     var repeat = function () {
-        if(sliderVal < 1578236760){
+        if(sliderVal < 441){
 			epochIndex += 1;
 			sliderVal = allEpochs[epochIndex] // gets the next epoch above
-			updateView(sliderVal);
+			updateView(parseInt(sliderVal));
 		}
         t = setTimeout(repeat, 100);
         //start = start / speedup;
