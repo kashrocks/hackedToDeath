@@ -3,6 +3,8 @@ var tracker = {};
 var colours = ["#800000","#e6194b","#f58231","#008080","#000075","#4363d8","#911eb4","#f032e6","#e6beff","#000000","808080","808000"];
 var nameColours = {};
 var sliderVal = 1578151801;
+allEpochs = [];
+epochIndex = 0;
 
 const circlePadding = 40;
 const textPadding = 20;
@@ -15,7 +17,26 @@ const textPadding = 20;
 // setTimeout(function(){updatePerson("Jimmy","244");}, 4000);
 // setTimeout(function(){updatePerson("Jimmy","130");}, 6000);
 
+function onStart() {
+	// getting all epochs
+	var http = new XMLHttpRequest();
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			allEpochs = JSON.parse(this.responseText);
+			console.log(allEpochs)
+		}
+	}
+	http.open('GET', "/allepochs", true);
+	http.send();
+	console.log("sent ting");
+
+}
+
 function updateView(time){
+	if (! allEpochs.includes(time)) {
+		// if there is no actual epoch for it dont call the thing
+		return
+	}
 	console.log("updated")
 	
 	sliderVal = time;
@@ -184,7 +205,8 @@ document.getElementById("button-left").addEventListener('click',function(){
 
     var repeat = function () {
         if(sliderVal > 1578151801){
-			sliderVal -= 1;
+			epochIndex -= 1;
+			sliderVal = allEpochs[epochIndex] // gets the next epoch above
 			updateView(sliderVal);
 		}
         t = setTimeout(repeat, 100);
@@ -207,7 +229,8 @@ btn_right.addEventListener('click',function(){
 
     var repeat = function () {
         if(sliderVal < 1578236760){
-			sliderVal += 1;
+			epochIndex += 1;
+			sliderVal = allEpochs[epochIndex] // gets the next epoch above
 			updateView(sliderVal);
 		}
         t = setTimeout(repeat, 100);
@@ -223,5 +246,5 @@ btn_right.addEventListener('click',function(){
     }
 });
 
-
+onStart();
 updateView(sliderVal);

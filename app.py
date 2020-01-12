@@ -13,6 +13,9 @@ murderAnalyzer.main()
 with open('analyzedData.json') as json_file:
 	analyzedData = json.load(json_file)
 
+with open('allEpochs.json') as json_file:
+	allEpochs = json.load(json_file)
+
 @app.route('/')
 def index():
 	return render_template('martello_challenge.html')
@@ -33,6 +36,12 @@ def sendData(epoch):
         if(closestEpoch != "0"): 
             response[guest] = analyzedData[guest][closestEpoch]
     return jsonify(response)
+
+@app.route('/allepochs', methods=['GET'])
+def sendEpochs():
+    return jsonify(allEpochs['all_epochs'])
+
+
 
 if __name__ == '__main__':
 	app.run(debug=True, port=8080) #run app on port 8080 in debug mode
