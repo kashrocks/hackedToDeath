@@ -8,13 +8,13 @@
 		
 		<div class="slidecontainer">
 			<button id="button-left" class="button">🡄</button>
-			<input type="range" min="1578151801" max="1578236760" value="1578151801" class="slider" id="timeSlider" oninput="updateView(parseInt(this.value))" onchange="updateView(parseInt(this.value))">
+			<input type="range" min="0" max="441" value="0" class="slider" id="timeSlider" oninput="getEpoch(parseInt(this.value))" onchange="getEpoch(parseInt(this.value))">
 			<button id="button-right" class="button">🡆</button>
 		</div>
 		
 
 		<div>
-		<span id="sliderValLabel">Time: <span id="timeStamp">1</span></span>
+		<span id="sliderValLabel">Time: <span id="timeStamp"></span></span>
 
 		<svg id="Layer_1" data - name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns: xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1186.18 1295.78">
     		<defs>

@@ -5,7 +5,6 @@ var nameColours = {};
 var sliderVal = 0;
 allEpochs = [];
 epochIndex = 0;
-test = 0;
 mutex = 0;
 
 const circlePadding = 40;
@@ -26,6 +25,7 @@ function onStart() {
 		if(http.readyState == 4 && http.status == 200) {
 			allEpochs = JSON.parse(this.responseText);
 			console.log(allEpochs)
+			getEpoch(sliderVal)
 		}
 	}
 	http.open('GET', "/allepochs", true);
@@ -49,7 +49,10 @@ function updateView(time){
 	document.getElementById("timeSlider").value = sliderVal;
 
 	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-	d.setSeconds(sliderVal);
+	console.log(time)
+	d.setSeconds(time);
+	console.log(d)
+
 	d = d.toString().split(" ")[4];
 	document.getElementById("sliderValLabel").innerHTML = "Time: " + d;
 
@@ -60,7 +63,6 @@ function updateView(time){
 	// 	console.log("Doesnt contains")
 	// 	return
 	// } 
-	test += 1;
 
 	if(mutex == 0){
 		console.log("creating request")
@@ -83,7 +85,7 @@ function updateView(time){
 		http.open('GET', "/time/"+time, true);
 		http.send();
 
-		console.log("sent ting " + test);
+		// console.log("sent ting " + test);
 	}
 	
 }
@@ -284,4 +286,4 @@ btn_right.addEventListener('click',function(){
 });
 
 onStart();
-updateView(sliderVal);
+// updateView(sliderVal);

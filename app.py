@@ -28,7 +28,10 @@ def sendData(epoch):
         #default value
         closestEpoch = "0"
         #looping through each guests data
-        for curr_epoch in analyzedData[guest]:
+        
+        all_epochs = list(analyzedData[guest].keys())
+        all_epochs.sort()
+        for curr_epoch in all_epochs:
             #if we have passed the largest epoch
             if int(curr_epoch) > int(epoch):
                 break
