@@ -33,13 +33,13 @@ function onStart() {
 }
 
 function updateView(time){
-	if (! allEpochs.includes(time)) {
+    if (! allEpochs.includes(time)) {
 		// if there is no actual epoch for it dont call the thing
 		return
 	} else {
 		// update 
 	}
-	console.log("updated")
+	console.log(nameColours)
 	
 	sliderVal = time;
 	document.getElementById("timeSlider").value = sliderVal;
@@ -92,7 +92,7 @@ function redraw(name,room){
 		x = parseFloat(d[0].slice(1));
 		y = parseFloat(d[1]);	
 	}
-	else if(room == "150" || room == "250"){
+	else if(room == "150" || room == "250" || room == "220"){
 		var roomObj = document.getElementById(room);
 		var d = roomObj.getAttribute("d");
 		d = d.split("[h]")[0].split(",");
@@ -129,8 +129,9 @@ function redraw(name,room){
 		// 	}
 		// }
 	}
-	//if not, they don't have a colour name
-	else{
+	//check if they don't have a colour name
+	
+	if(!nameColours[name]){
 		nameColours[name] = colours[Object.keys(nameColours).length];
 	}
 
@@ -248,5 +249,5 @@ btn_right.addEventListener('click',function(){
     }
 });
 
-onStart();
+
 updateView(sliderVal);
