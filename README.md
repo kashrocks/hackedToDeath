@@ -1,5 +1,5 @@
 # hackedToDeath
-Martello Challenge for Carleton University Hacking Competition
+Martello Murder Myster Challenge for Carleton University Hacking Competition
 
 To run:
 
