@@ -126,8 +126,8 @@ function redraw(name,room){
 	//adjust for room type
 
 	//elevator
-	if(room == "elevator"){
-		//do something
+	if(room == "199"){
+		x += personSpacing * n;
 	}
 	//Access Point
 	else if(room[0] == "a"){
@@ -136,12 +136,26 @@ function redraw(name,room){
 			y -= 25;
 		}
 		else{
-			x -= personSpacing;
-			y += personSpacing * n - 80;
+			y += personSpacing * (n%2) - 80;
+
+			//if first floor, add custom spacing technique
+			if(room[2] == "1"){
+				x += Math.floor(n/2) * personSpacing - 120 ;
+			}
+			else{
+				x -= personSpacing;
+			}
+	
 		}
 	}
 	//otherwise regular room
 	else{
+		//check if exceeds max to overlap
+		if(n >= 4){
+			n -= 4;
+			x += personSpacing + 30;
+		}
+
 		y += personSpacing * n;
 	}
 
