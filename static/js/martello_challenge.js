@@ -16,6 +16,7 @@ const textPadding = 20;
 // setTimeout(function(){updatePerson("Jimmy","130");}, 6000);
 
 function updateView(time){
+	console.log("updated")
 	
 	sliderVal = time;
 	document.getElementById("timeSlider").value = sliderVal;
@@ -26,27 +27,41 @@ function updateView(time){
 	document.getElementById("sliderValLabel").innerHTML = "Time: " + d;
 
 	//update people
+	console.log("creating request")
 	var http = new XMLHttpRequest();
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
 			updates = JSON.parse(this.responseText);
+			console.log(updates)
 
+			clearAll();
 			for(person of Object.keys(updates)){
-				updatePerson(person,updates[name]["location"]);
+				redraw(person,updates[person].location);
 			}
 		}
 	}
 	http.open('GET', "/time/"+sliderVal, true);
-	//http.send();
+	http.send();
+	console.log("sent ting");
 }
 
-function updatePerson(name,room){
+function clearAll(){
+	tracker = {};
+	for(name of Object.keys(nameColours)){
+		if(document.getElementById(name)){
+			document.getElementById(name).outerHTML = "";
+			document.getElementById(name+"_text").outerHTML = "";
+		}
+	}
+}
+
+function redraw(name,room){
 	//parse the room if not ice
 	if(room == "0"){
 		x = -1000;
 		y = -1000;
 	}
-	else if(room[0] == "A"){
+	else if(room[0] == "a"){
 		var roomObj = document.getElementById(room);
 		var d = roomObj.getAttribute("d");
 		d = d.split("[aA]")[0].split(",");
@@ -65,10 +80,12 @@ function updatePerson(name,room){
 	else if(room != "234"){
 		var roomObj = document.getElementById(room);
 		var d = roomObj.getAttribute("d");
-		d = d.split("H")[1].split("V");
+		d = d.split("H")[1].split(/V/i);
 
 		x = parseFloat(d[0]);
 		y = parseFloat(d[1].split("H")[0]);	
+
+		
 	}
 	
 	//otherwise its ice
@@ -79,15 +96,15 @@ function updatePerson(name,room){
 
 	//delete old elements if they exist
 	if(document.getElementById(name)){
-		document.getElementById(name).outerHTML = "";
-		document.getElementById(name+"_text").outerHTML = "";
+		// document.getElementById(name).outerHTML = "";
+		// document.getElementById(name+"_text").outerHTML = "";
 
 		//take that person out of their old room
-		for(key of Object.keys(tracker)) {
-			if(tracker[key].indexOf(name) != -1){
-				tracker[key].splice(tracker[key].indexOf(name), 1);
-			}
-		}
+		// for(key of Object.keys(tracker)) {
+		// 	if(tracker[key].indexOf(name) != -1){
+		// 		tracker[key].splice(tracker[key].indexOf(name), 1);
+		// 	}
+		// }
 	}
 	//if not, they don't have a colour name
 	else{
@@ -112,7 +129,7 @@ function updatePerson(name,room){
 		//do something
 	}
 	//Access Point
-	else if(room[0] == "A"){
+	else if(room[0] == "a"){
 		if(room.charAt(room.length - 1) == "2"){
 			x += (personSpacing+30) * n - 140;
 			y -= 25;
@@ -176,7 +193,6 @@ document.getElementById("button-left").addEventListener('click',function(){
 
     btn_left.onmousedown = function() {
 		repeat();
-		console.log("ha");
     }
 
     btn_left.onmouseup = function () {
@@ -186,6 +202,7 @@ document.getElementById("button-left").addEventListener('click',function(){
 
 var btn_right = document.getElementById("button-right");
 btn_right.addEventListener('click',function(){
+	console.log("hi");
 	var t;
 
     var repeat = function () {

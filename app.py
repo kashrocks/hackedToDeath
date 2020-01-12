@@ -4,14 +4,18 @@ import murderAnalyzer
 import json
 import numpy
 
-from flask import Flask, jsonify, request #import objects from the Flask model
+from flask import Flask, jsonify, request, render_template #import objects from the Flask model
 app = Flask(__name__) #define app using Flask
 
 # exec('murderAnalyzer.py')
 murderAnalyzer.main()
 
 with open('analyzedData.json') as json_file:
-    analyzedData = json.load(json_file)
+	analyzedData = json.load(json_file)
+
+@app.route('/')
+def index():
+	return render_template('martello_challenge.html')
 
 @app.route('/time/<string:epoch>', methods=['GET'])
 def sendData(epoch):
