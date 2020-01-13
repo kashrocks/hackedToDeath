@@ -2,7 +2,7 @@
 Martello Murder Mystery Challenge for Carleton University Hackathon - 3rd Overall!
 
 To run if the Global url is active:
-  1. Go to www.hacked2death.tech and become a proffesional forensics expert instantly!
+  1. Go to https://hacked2death.herokuapp.com and become a proffesional forensics expert instantly!
 
 To run if the global url is not active
 
@@ -14,4 +14,4 @@ To run if the global url is not active
 Created by Kashyap Achar, Tobias Schlagenhaufer, Mayank Agrawall and Redbulls
 January 12, 2020
 
-www.hacked2death.tech
+https://hacked2death.herokuapp.com/
