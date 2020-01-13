@@ -1,5 +1,5 @@
 # hackedToDeath
-Martello Murder Myster Challenge for Carleton University Hacking Competition
+Martello Murder Mystery Challenge for Carleton University Hackathon - 3rd Overall!
 
 To run if the Global url is active:
   1. Go to www.hacked2death.tech and become a proffesional forensics expert instantly!
