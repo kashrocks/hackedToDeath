@@ -1,4 +1,4 @@
-# Server for the Martello Murder Analyzer
+# Server for the Martello Murder Analyzer Application
 
 import murderAnalyzer
 import json
