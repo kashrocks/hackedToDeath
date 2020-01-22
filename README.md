@@ -3,7 +3,7 @@ Martello Murder Mystery Challenge for Carleton University Hackathon - 3rd Overal
 Runner up for Martello Challenge
 
 Website:
-  1. Go to www.hacked2death.tech and become a proffesional forensics expert instantly!
+  1. Go to https://hacked2death.herokuapp.com/ and become a proffesional forensics expert instantly!
 
 To run locally:
 
@@ -15,4 +15,4 @@ To run locally:
 Created by Kashyap Achar, Tobias Schlagenhaufer, Mayank Agrawall and Redbulls
 January 12, 2020
 
-http://www.hacked2death.tech/
+https://hacked2death.herokuapp.com/
