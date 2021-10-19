@@ -1,4 +1,4 @@
-# hackedToDeath
+# hackedToDeath - cuHacking 2020 Winner
 Martello Murder Mystery Challenge for Carleton University Hackathon - 3rd Overall for hackathon!
 Runner up for Martello Challenge
 
